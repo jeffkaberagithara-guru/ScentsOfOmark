@@ -20,3 +20,8 @@ export const SPACING = {
   section: "80px 24px",
   card: "24px",
 } as const;
+
+export const WA_NUMBER = "254114036858";
+
+export const WA_LINK = (message: string) =>
+  `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
