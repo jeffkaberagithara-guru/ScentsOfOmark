@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+/* Project font helpers to match design tokens */
+.font-heading {
+	font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-body {
+	font-family: 'Jost', sans-serif;
+}
