@@ -41,16 +41,17 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.35 }}
-          className="font-heading font-semibold text-white text-[clamp(52px,9vw,104px)] leading-[1.05] mb-8 shadow-[0_4px_40px_rgba(0,0,0,0.5)]"
+          className="font-heading font-semibold text-white text-[clamp(52px,9vw,104px)] leading-[1.05] mb-8]"
         >
-          Wear a scent that <span className="text-[#C9A94A] italic">tells your story.</span>
+          Wear a scent that{" "}
+          <span className="text-[#C9A94A] italic">tells your story.</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="font-body text-[clamp(16px,2vw,20px)] leading-[1.8] text-[#DDDDDD] max-w-[560px] mx-auto mb-12 shadow-[0_2px_16px_rgba(0,0,0,0.5)]"
+          className="font-body text-[clamp(16px,2vw,20px)] leading-[1.8] text-[#DDDDDD] max-w-[560px] mx-auto mb-12 mt-4 shadow-[0_2px_16px_rgba(0,0,0,0)]"
         >
           Handpicked perfumes and colognes for the man and woman who understand
           that fragrance is the invisible, unforgettable part of their presence.
@@ -72,7 +73,9 @@ export default function HeroSection() {
           </motion.a>
 
           <motion.a
-            href={WA_LINK("Hi, I'd like to order a fragrance from Trademark Aroma")}
+            href={WA_LINK(
+              "Hi, I'd like to order a fragrance from Trademark Aroma",
+            )}
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.04 }}
