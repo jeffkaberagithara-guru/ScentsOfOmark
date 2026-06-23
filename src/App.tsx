@@ -9,7 +9,6 @@ import Fragrances from "./pages/Fragrances";
 import OurStory from "./pages/OurStory";
 import ScentGuide from "./pages/ScentGuide";
 import Contact from "./pages/Contact";
-import { COLORS, FONTS } from "./constants/theme";
 
 function Home() {
   return (
