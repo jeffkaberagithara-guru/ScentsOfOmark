@@ -20,10 +20,13 @@ export default function Footer() {
             A fragrance experience that lingers long after the moment.
           </h2>
           <p className="text-[18px] leading-8 text-[#888888] max-w-[520px]">
-            Discover curated scents, warm service, and luxurious rituals crafted for the bold, the refined, and everyone in between.
+            Discover curated scents, warm service, and luxurious rituals crafted
+            for the bold, the refined, and everyone in between.
           </p>
           <a
-            href={WA_LINK("Hi, I'd like to order a fragrance from Trademark Aroma")}
+            href={WA_LINK(
+              "Hi, I'd like to order a fragrance from Trademark Aroma",
+            )}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block mt-8 rounded-[28px] bg-[#C9A94A] px-8 py-4 text-[16px] font-bold uppercase tracking-[0.12em] text-[#0B0B0B]"
@@ -55,7 +58,9 @@ export default function Footer() {
               Contact
             </div>
             <a
-              href={WA_LINK("Hi, I'd like to order a fragrance from Trademark Aroma")}
+              href={WA_LINK(
+                "Hi, I'd like to order a fragrance from Trademark Aroma",
+              )}
               target="_blank"
               rel="noopener noreferrer"
               className="block text-[16px] font-semibold text-[#F4EADE] mb-4 hover:text-[#C9A94A]"
@@ -63,14 +68,17 @@ export default function Footer() {
               +254 114 036 858
             </a>
             <p className="text-[15px] text-[#888888] leading-8 max-w-[260px]">
-              Nairobi, Kenya · Personal fragrance consultations and same-day support.
+              Nairobi, Kenya · Personal fragrance consultations and same-day
+              support.
             </p>
           </div>
         </div>
       </div>
 
       <div className="mt-10 border-t border-[#2A2519] pt-7 flex flex-col gap-2 sm:flex-row sm:justify-between text-[#888888] text-sm">
-        <span>© {new Date().getFullYear()} Trademark Aroma. All rights reserved.</span>
+        <span>
+          © {new Date().getFullYear()} TradeMark Aroma. All rights reserved.
+        </span>
         <span>Crafted for unforgettable presence.</span>
       </div>
     </footer>
