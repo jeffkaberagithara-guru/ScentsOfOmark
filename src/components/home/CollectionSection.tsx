@@ -88,9 +88,13 @@ function FragranceCard({
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
       whileHover={{ y: -6 }}
-      className="bg-[#1C1A14] border border-[#2A2519] hover:border-[#C9A94A] rounded-[16px] overflow-hidden flex flex-col cursor-default transition-all duration-300"
+      className="bg-[#1C1A14] border border-[#2A2519] hover:border-[#C9A94A] rounded-[16px] overflow-hidden flex flex-col cursor-default transition-colors duration-300"
     >
-      <div className="relative h-[260px] overflow-hidden flex-shrink-0">
+      {/* Image */}
+      <div
+        className="relative overflow-hidden flex-shrink-0"
+        style={{ height: "clamp(200px, 28vw, 260px)" }}
+      >
         <motion.img
           src={fragrance.image}
           alt={fragrance.name}
@@ -98,42 +102,74 @@ function FragranceCard({
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="w-full h-full object-cover block"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(11,11,11,0.85)_0%,rgba(11,11,11,0.1)_60%)]" />
-        <span className="absolute top-4 left-4 rounded-[20px] border border-[#6B5A2E] bg-[rgba(11,11,11,0.6)] px-3 py-1.5 text-[12px] font-semibold uppercase tracking-[0.18em] text-[#C9A94A]">
+        <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(11,11,11,0.85)_0%,rgba(11,11,11,0.08)_60%)]" />
+        <span
+          className="absolute top-4 left-4 rounded-[20px] border border-[#6B5A2E] bg-[rgba(11,11,11,0.6)] px-3 py-1.5 font-semibold uppercase text-[#C9A94A]"
+          style={{
+            fontSize: "clamp(10px, 1.4vw, 12px)",
+            letterSpacing: "0.18em",
+          }}
+        >
           {fragrance.gender}
         </span>
       </div>
 
-      <div className="p-7 flex flex-col gap-4 flex-1">
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            <h3 className="text-[32px] font-heading font-semibold leading-[1.1] text-[#F4EADE]">
-              {fragrance.name}
-            </h3>
-            <p className="text-[16px] text-[#888888] leading-[1.7]">
-              {fragrance.description}
-            </p>
-          </div>
-        </div>
+      {/* Body */}
+      <div
+        className="flex flex-col gap-4 flex-1"
+        style={{ padding: "clamp(20px, 3vw, 28px)" }}
+      >
+        <h3
+          className="font-heading font-semibold text-[#F4EADE] leading-[1.1] m-0"
+          style={{ fontSize: "clamp(22px, 3.5vw, 32px)" }}
+        >
+          {fragrance.name}
+        </h3>
 
-        <div className="h-px bg-[#2A2519]" />
+        <p
+          className="text-[#888888] m-0"
+          style={{ fontSize: "clamp(14px, 1.8vw, 16px)", lineHeight: 1.7 }}
+        >
+          {fragrance.description}
+        </p>
 
-        <p className="text-[13px] font-semibold uppercase tracking-[0.12em] text-[#6B5A2E]">
+        <div className="h-px bg-[#2A2519] flex-shrink-0" />
+
+        <p
+          className="font-semibold uppercase text-[#6B5A2E] m-0"
+          style={{
+            fontSize: "clamp(11px, 1.4vw, 13px)",
+            letterSpacing: "0.12em",
+          }}
+        >
           {fragrance.notes}
         </p>
 
         <div className="mt-auto flex items-center justify-between pt-2">
-          <span className="text-[14px] font-medium tracking-[0.08em] text-[#555555]">
+          <span
+            className="font-medium text-[#555555]"
+            style={{
+              fontSize: "clamp(12px, 1.6vw, 14px)",
+              letterSpacing: "0.08em",
+            }}
+          >
             {fragrance.mood}
           </span>
 
           <motion.a
-            href={WA_LINK(`Hi, I'd like to order ${fragrance.name} from Trademark Aroma`)}
+            href={WA_LINK(
+              `Hi, I'd like to order ${fragrance.name} from Trademark Aroma`,
+            )}
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.06 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 rounded-[20px] bg-[#C9A94A] px-4 py-2 text-[13px] font-semibold uppercase text-[#0B0B0B]"
+            className="inline-flex items-center rounded-[20px] bg-[#C9A94A] text-[#0B0B0B] font-semibold uppercase no-underline"
+            style={{
+              padding: "clamp(8px, 1.4vw, 10px) clamp(16px, 2.5vw, 22px)",
+              fontSize: "clamp(11px, 1.4vw, 13px)",
+              letterSpacing: "0.1em",
+            }}
           >
             Order
           </motion.a>
@@ -145,25 +181,48 @@ function FragranceCard({
 
 export default function CollectionSection() {
   return (
-    <section id="collection" className="px-6 py-[100px] max-w-[1200px] mx-auto">
+    <section
+      id="collection"
+      className="w-full max-w-[1200px] mx-auto"
+      style={{ padding: "clamp(60px, 10vw, 100px) clamp(16px, 4vw, 24px)" }}
+    >
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7 }}
-        className="text-center mb-16"
+        className="text-center"
+        style={{ marginBottom: "clamp(40px, 6vw, 64px)" }}
       >
-        <p className="font-body text-[13px] font-semibold uppercase tracking-[0.22em] text-[#6B5A2E] mb-4">
+        <p
+          className="font-body font-semibold uppercase text-[#6B5A2E]"
+          style={{
+            fontSize: "clamp(11px, 1.5vw, 13px)",
+            letterSpacing: "0.22em",
+            marginBottom: "16px",
+          }}
+        >
           The Collection
         </p>
-        <h2 className="font-heading text-[clamp(42px,6vw,68px)] font-semibold text-[#F4EADE] leading-[1.1]">
+        <h2
+          className="font-heading font-semibold text-[#F4EADE] leading-[1.1] m-0"
+          style={{ fontSize: "clamp(34px, 6vw, 68px)" }}
+        >
           Signature Fragrances
         </h2>
       </motion.div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+      {/* Responsive grid: 1 col → 2 col → 3 col */}
+      <div
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+        style={{ gap: "clamp(16px, 2.5vw, 28px)" }}
+      >
         {fragrances.map((fragrance, index) => (
-          <FragranceCard key={fragrance.id} fragrance={fragrance} index={index} />
+          <FragranceCard
+            key={fragrance.id}
+            fragrance={fragrance}
+            index={index}
+          />
         ))}
       </div>
 
@@ -172,13 +231,19 @@ export default function CollectionSection() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.3 }}
-        className="text-center mt-16"
+        className="text-center"
+        style={{ marginTop: "clamp(40px, 6vw, 64px)" }}
       >
         <motion.a
           href="/fragrances"
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.97 }}
-          className="inline-flex rounded-[32px] border border-[#C9A94A] bg-transparent px-10 py-4 text-[14px] font-semibold uppercase tracking-[0.14em] text-[#C9A94A]"
+          className="inline-flex rounded-[32px] border border-[#C9A94A] bg-transparent text-[#C9A94A] font-semibold uppercase no-underline"
+          style={{
+            padding: "clamp(12px, 1.8vw, 16px) clamp(28px, 4vw, 40px)",
+            fontSize: "clamp(12px, 1.5vw, 14px)",
+            letterSpacing: "0.14em",
+          }}
         >
           View Full Collection
         </motion.a>
