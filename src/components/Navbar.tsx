@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { COLORS, FONTS } from "../constants/theme";
+import { COLORS, FONTS, WA_LINK } from "../constants/theme";
 
 const navLinks = [
   { label: "Our Story", path: "/our-story" },
@@ -17,23 +17,29 @@ export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleLogoClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-    if (location.pathname !== "/") {
-      navigate("/");
-    }
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (location.pathname !== "/") navigate("/");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
     setMenuOpen(false);
   }, [location]);
+
+  // Lock body scroll when mobile menu open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
 
   return (
     <>
@@ -41,39 +47,99 @@ export default function Navbar() {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className={`fixed inset-x-0 top-0 z-50 flex h-18 items-center justify-between px-8 transition-all duration-300 ${
-          scrolled
-            ? "bg-[#0B0B0B] border-b border-[#3A3221]"
-            : "bg-transparent border-b border-transparent"
-        }`}
+        style={{
+          height: "72px",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 50,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "0 clamp(16px, 4vw, 32px)",
+          transition: "background-color 0.3s ease, border-color 0.3s ease",
+          backgroundColor: scrolled ? COLORS.onyx : "transparent",
+          borderBottom: scrolled
+            ? `0.5px solid ${COLORS.surfaceLight}`
+            : "0.5px solid transparent",
+        }}
       >
         {/* Logo */}
-        <Link to="/" onClick={handleLogoClick} className="no-underline">
+        <Link
+          to="/"
+          onClick={handleLogoClick}
+          style={{ textDecoration: "none", flexShrink: 0 }}
+        >
           <motion.div
             whileHover={{ opacity: 0.8 }}
-            className="flex flex-col items-start gap-0.75 text-[#C9A94A] uppercase leading-[1.05]"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              gap: "2px",
+              color: "#C9A94A",
+              textTransform: "uppercase",
+              lineHeight: 1.05,
+            }}
           >
-            <span className="text-[15px] font-bold tracking-[0.16em] font-body">
+            <span
+              style={{
+                fontFamily: FONTS.body,
+                fontSize: "clamp(12px, 2vw, 15px)",
+                fontWeight: 700,
+                letterSpacing: "0.16em",
+              }}
+            >
               TradeMark Aroma
             </span>
-            <span className="text-[10px] font-medium tracking-[0.18em] text-[#B79C50] font-body">
+            <span
+              style={{
+                fontFamily: FONTS.body,
+                fontSize: "clamp(8px, 1.2vw, 10px)",
+                fontWeight: 500,
+                letterSpacing: "0.18em",
+                color: "#B79C50",
+              }}
+            >
               Scent That Defines You
             </span>
           </motion.div>
         </Link>
 
-        <div className="hidden md:flex items-center gap-6">
+        {/* Desktop nav */}
+        <div
+          className="hidden md:flex items-center"
+          style={{ gap: "clamp(16px, 2.5vw, 24px)" }}
+        >
           {navLinks.map((link) => {
             const isActive = location.pathname === link.path;
             return (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-[12px] uppercase tracking-widest font-body transition-colors duration-300 ${
-                  isActive
-                    ? "text-[#C9A94A] border-b-2 border-[#C9A94A] pb-1"
-                    : "text-[#B7B0A0] hover:text-[#F4EADE]"
-                }`}
+                style={{
+                  textDecoration: "none",
+                  fontFamily: FONTS.body,
+                  fontSize: "12px",
+                  fontWeight: 400,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                  transition: "color 0.3s ease",
+                  color: isActive ? "#C9A94A" : "#B7B0A0",
+                  borderBottom: isActive
+                    ? "1px solid #C9A94A"
+                    : "1px solid transparent",
+                  paddingBottom: "2px",
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive)
+                    (e.currentTarget as HTMLElement).style.color = "#F4EADE";
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive)
+                    (e.currentTarget as HTMLElement).style.color = "#B7B0A0";
+                }}
               >
                 {link.label}
               </Link>
@@ -81,83 +147,132 @@ export default function Navbar() {
           })}
 
           <motion.a
-            href="https://wa.me/254114036858?text=Hi%2C%20I%27d%20like%20to%20order%20a%20fragrance%20from%20Trademark%20Aroma"
+            href={WA_LINK(
+              "Hi, I'd like to place an order with Trademark Aroma",
+            )}
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center justify-center rounded-3xl bg-[#C9A94A] px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#0B0B0B] font-body shadow-[0_4px_20px_-10px_rgba(201,169,74,0.9)] no-underline"
+            style={{
+              textDecoration: "none",
+              fontFamily: FONTS.body,
+              fontSize: "11px",
+              fontWeight: 600,
+              textTransform: "uppercase",
+              letterSpacing: "0.12em",
+              color: COLORS.onyx,
+              backgroundColor: COLORS.gold,
+              padding: "9px 20px",
+              borderRadius: "24px",
+              whiteSpace: "nowrap",
+            }}
           >
             Order Now
           </motion.a>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile hamburger */}
         <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="flex md:hidden items-center justify-center rounded-full border-none bg-transparent p-1 text-[#C9A94A] focus:outline-none"
-          aria-label="Open navigation menu"
+          onClick={() => setMenuOpen((o) => !o)}
+          className="flex md:hidden"
+          style={{
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            color: COLORS.gold,
+            padding: "4px",
+            flexShrink: 0,
+          }}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
         >
           {menuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </motion.nav>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile menu — full screen overlay below navbar */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
             style={{
               position: "fixed",
               top: "72px",
               left: 0,
               right: 0,
-              zIndex: 99,
+              bottom: 0,
+              zIndex: 49,
               backgroundColor: COLORS.onyx,
-              borderBottom: `0.5px solid ${COLORS.surfaceLight}`,
-              padding: "24px 32px 32px",
+              borderTop: `0.5px solid ${COLORS.surfaceLight}`,
               display: "flex",
               flexDirection: "column",
-              gap: "28px",
+              padding: "clamp(24px, 5vw, 40px) clamp(20px, 5vw, 32px)",
+              overflowY: "auto",
+              overflowX: "hidden",
             }}
           >
-            {navLinks.map((link, i) => {
-              const isActive = location.pathname === link.path;
-              return (
-                <motion.div
-                  key={link.path}
-                  initial={{ opacity: 0, x: -16 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.07, duration: 0.3 }}
-                >
-                  <Link
-                    to={link.path}
+            {/* Nav links */}
+            <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
+              {navLinks.map((link, i) => {
+                const isActive = location.pathname === link.path;
+                return (
+                  <motion.div
+                    key={link.path}
+                    initial={{ opacity: 0, x: -16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.06, duration: 0.25 }}
                     style={{
-                      textDecoration: "none",
-                      fontFamily: FONTS.heading,
-                      fontSize: "28px",
-                      fontWeight: 400,
-                      letterSpacing: "0.04em",
-                      color: isActive ? COLORS.gold : COLORS.ivory,
+                      borderBottom: `0.5px solid ${COLORS.surfaceLight}`,
                     }}
                   >
-                    {link.label}
-                  </Link>
-                </motion.div>
-              );
-            })}
+                    <Link
+                      to={link.path}
+                      style={{
+                        textDecoration: "none",
+                        fontFamily: FONTS.heading,
+                        fontSize: "clamp(26px, 6vw, 38px)",
+                        fontWeight: 400,
+                        letterSpacing: "0.04em",
+                        color: isActive ? COLORS.gold : COLORS.ivory,
+                        display: "block",
+                        padding: "clamp(12px, 2.5vw, 18px) 0",
+                      }}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </div>
 
+            {/* WhatsApp CTA */}
             <motion.a
-              href="https://wa.me/254114036858?text=Hi%2C%20I%27d%20like%20to%20order%20a%20fragrance%20from%20Trademark%20Aroma"
+              href={WA_LINK(
+                "Hi, I'd like to place an order with Trademark Aroma",
+              )}
               target="_blank"
               rel="noopener noreferrer"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.32 }}
-              className="mt-2 inline-flex w-full items-center justify-center rounded-3xl bg-[#C9A94A] px-6 py-3 text-center text-[12px] font-semibold uppercase tracking-[0.12em] text-[#0B0B0B] font-body no-underline"
+              transition={{ delay: 0.28 }}
+              style={{
+                textDecoration: "none",
+                fontFamily: FONTS.body,
+                fontSize: "clamp(12px, 1.5vw, 14px)",
+                fontWeight: 600,
+                textTransform: "uppercase",
+                letterSpacing: "0.12em",
+                color: COLORS.onyx,
+                backgroundColor: COLORS.gold,
+                padding: "clamp(14px, 2vw, 18px) 24px",
+                borderRadius: "32px",
+                textAlign: "center",
+                display: "block",
+                marginTop: "clamp(24px, 4vw, 32px)",
+              }}
             >
               Order on WhatsApp
             </motion.a>
