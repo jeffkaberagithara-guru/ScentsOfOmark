@@ -1,260 +1,264 @@
 import { COLORS, FONTS } from "../../constants/theme";
 import { motion } from "framer-motion";
 
+const stats = [
+  { number: "100+", label: "Fragrances" },
+  { number: "3+", label: "Years curating" },
+  { number: "1K+", label: "Happy clients" },
+];
+
 export default function OurStorySection() {
   return (
     <section
-      style={{
-        padding: "100px 24px",
-        maxWidth: "1200px",
-        margin: "0 auto",
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-        gap: "80px",
-        alignItems: "center",
-      }}
+      className="w-full max-w-[1200px] mx-auto"
+      style={{ padding: "clamp(60px, 10vw, 100px) clamp(16px, 4vw, 24px)" }}
     >
-      {/* Left — image */}
-      <motion.div
-        initial={{ opacity: 0, x: -40 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.9, ease: "easeOut" }}
-        style={{ position: "relative" }}
+      <div
+        className="grid grid-cols-1 lg:grid-cols-2 items-center"
+        style={{ gap: "clamp(48px, 7vw, 80px)" }}
       >
-        <div
-          style={{
-            borderRadius: "16px",
-            overflow: "hidden",
-            height: "560px",
-          }}
-        >
-          <motion.img
-            src="https://images.pexels.com/photos/14490634/pexels-photo-14490634.jpeg?auto=compress&cs=tinysrgb&w=1200"
-            alt="TradeMark Aroma story"
-            whileHover={{ scale: 1.04 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              display: "block",
-            }}
-          />
-        </div>
-
-        {/* Floating accent card */}
+        {/* Left — image block. Extra padding creates safe space for floating card */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: -40 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.4 }}
+          transition={{ duration: 0.9, ease: "easeOut" }}
           style={{
-            position: "absolute",
-            bottom: "-28px",
-            right: "-28px",
-            backgroundColor: COLORS.surface,
-            border: `1px solid ${COLORS.goldAged}`,
-            borderRadius: "12px",
-            padding: "20px 28px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "6px",
-            backdropFilter: "blur(12px)",
+            position: "relative",
+            paddingBottom: "40px",
+            paddingRight: "40px",
           }}
+          className="pl-4 lg:pl-0"
         >
-          <span
+          {/* Main image */}
+          <div
             style={{
-              fontFamily: FONTS.heading,
-              fontSize: "44px",
-              fontWeight: 600,
-              color: COLORS.gold,
-              lineHeight: 1,
+              borderRadius: "16px",
+              overflow: "hidden",
+              height: "clamp(280px, 48vw, 560px)",
             }}
           >
-            100+
-          </span>
-          <span
+            <motion.img
+              src="https://images.pexels.com/photos/14490634/pexels-photo-14490634.jpeg?auto=compress&cs=tinysrgb&w=1200"
+              alt="Trademark Aroma story"
+              whileHover={{ scale: 1.04 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                display: "block",
+              }}
+            />
+          </div>
+
+          {/* Floating accent card — sits inside padded wrapper, never overflows viewport */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.4 }}
             style={{
-              fontFamily: FONTS.body,
-              fontSize: "13px",
-              fontWeight: 500,
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
-              color: COLORS.textMuted,
+              position: "absolute",
+              bottom: 0,
+              right: 0,
+              backgroundColor: COLORS.surface,
+              border: `1px solid ${COLORS.goldAged}`,
+              borderRadius: "12px",
+              padding: "clamp(14px, 2vw, 20px) clamp(18px, 3vw, 28px)",
+              display: "flex",
+              flexDirection: "column",
+              gap: "6px",
+              backdropFilter: "blur(12px)",
+              minWidth: "130px",
             }}
           >
-            Curated Scents
-          </span>
+            <span
+              style={{
+                fontFamily: FONTS.heading,
+                fontSize: "clamp(28px, 5vw, 44px)",
+                fontWeight: 600,
+                color: COLORS.gold,
+                lineHeight: 1,
+              }}
+            >
+              100+
+            </span>
+            <span
+              style={{
+                fontFamily: FONTS.body,
+                fontSize: "clamp(10px, 1.4vw, 13px)",
+                fontWeight: 500,
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                color: COLORS.textMuted,
+              }}
+            >
+              Curated Scents
+            </span>
+          </motion.div>
+
+          {/* Gold line — kept inside section padding, never bleeds left */}
+          <motion.div
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            style={{
+              position: "absolute",
+              top: "40px",
+              left: 0,
+              width: "3px",
+              height: "clamp(60px, 10vw, 100px)",
+              backgroundColor: COLORS.gold,
+              transformOrigin: "top",
+              borderRadius: "2px",
+            }}
+            className="hidden sm:block"
+          />
         </motion.div>
 
-        {/* Gold line accent */}
+        {/* Right — text content */}
         <motion.div
-          initial={{ scaleY: 0 }}
-          whileInView={{ scaleY: 1 }}
+          initial={{ opacity: 0, x: 40 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          style={{
-            position: "absolute",
-            top: "40px",
-            left: "-14px",
-            width: "3px",
-            height: "100px",
-            backgroundColor: COLORS.gold,
-            transformOrigin: "top",
-            borderRadius: "2px",
-          }}
-        />
-      </motion.div>
-
-      {/* Right — text */}
-      <motion.div
-        initial={{ opacity: 0, x: 40 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.9, ease: "easeOut", delay: 0.15 }}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "28px",
-        }}
-      >
-        <p
-          style={{
-            fontFamily: FONTS.body,
-            fontSize: "13px",
-            fontWeight: 600,
-            letterSpacing: "0.22em",
-            textTransform: "uppercase",
-            color: COLORS.goldAged,
-            margin: 0,
-          }}
-        >
-          Our Story
-        </p>
-
-        <h2
-          style={{
-            fontFamily: FONTS.heading,
-            fontSize: "clamp(38px, 4.5vw, 58px)",
-            fontWeight: 600,
-            lineHeight: 1.15,
-            letterSpacing: "0.02em",
-            color: COLORS.ivory,
-            margin: 0,
-          }}
-        >
-          Fragrance is the most{" "}
-          <span style={{ color: COLORS.gold, fontStyle: "italic" }}>
-            personal luxury
-          </span>{" "}
-          of all.
-        </h2>
-
-        <p
-          style={{
-            fontFamily: FONTS.body,
-            fontSize: "17px",
-            fontWeight: 400,
-            lineHeight: 1.9,
-            color: COLORS.textMuted,
-            margin: 0,
-          }}
-        >
-          Trademark Aroma was born from a single belief — that the right
-          fragrance does not just smell good, it changes how you carry yourself.
-          It is the last thing you put on and the first thing people remember.
-        </p>
-
-        <p
-          style={{
-            fontFamily: FONTS.body,
-            fontSize: "17px",
-            fontWeight: 400,
-            lineHeight: 1.9,
-            color: COLORS.textMuted,
-            margin: 0,
-          }}
-        >
-          Every bottle in our collection is handpicked for the man and woman who
-          move through the world with intention. We do not sell fragrances. We
-          curate identity.
-        </p>
-
-        {/* Stats row */}
-        <div
+          transition={{ duration: 0.9, ease: "easeOut", delay: 0.15 }}
           style={{
             display: "flex",
-            gap: "48px",
-            flexWrap: "wrap",
-            paddingTop: "8px",
+            flexDirection: "column",
+            gap: "clamp(18px, 3vw, 28px)",
           }}
         >
-          {[
-            { number: "100+", label: "Fragrances" },
-            { number: "3+", label: "Years curating" },
-            { number: "1K+", label: "Happy clients" },
-          ].map((stat) => (
-            <div key={stat.label}>
-              <div
-                style={{
-                  fontFamily: FONTS.heading,
-                  fontSize: "42px",
-                  fontWeight: 600,
-                  color: COLORS.gold,
-                  lineHeight: 1,
-                  marginBottom: "8px",
-                }}
-              >
-                {stat.number}
-              </div>
-              <div
-                style={{
-                  fontFamily: FONTS.body,
-                  fontSize: "13px",
-                  fontWeight: 500,
-                  letterSpacing: "0.14em",
-                  textTransform: "uppercase",
-                  color: COLORS.textMuted,
-                }}
-              >
-                {stat.label}
-              </div>
-            </div>
-          ))}
-        </div>
+          <p
+            style={{
+              fontFamily: FONTS.body,
+              fontSize: "clamp(11px, 1.5vw, 13px)",
+              fontWeight: 600,
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
+              color: COLORS.goldAged,
+              margin: 0,
+            }}
+          >
+            Our Story
+          </p>
 
-        {/* Divider */}
-        <div
-          style={{
-            height: "0.5px",
-            backgroundColor: COLORS.surfaceLight,
-          }}
-        />
+          <h2
+            style={{
+              fontFamily: FONTS.heading,
+              fontSize: "clamp(30px, 4.5vw, 58px)",
+              fontWeight: 600,
+              lineHeight: 1.15,
+              letterSpacing: "0.02em",
+              color: COLORS.ivory,
+              margin: 0,
+            }}
+          >
+            Fragrance is the most{" "}
+            <span style={{ color: COLORS.gold, fontStyle: "italic" }}>
+              personal luxury
+            </span>{" "}
+            of all.
+          </h2>
 
-        {/* CTA */}
-        <motion.a
-          href="/our-story"
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-          style={{
-            textDecoration: "none",
-            fontFamily: FONTS.body,
-            fontSize: "14px",
-            fontWeight: 600,
-            letterSpacing: "0.14em",
-            textTransform: "uppercase",
-            color: COLORS.onyx,
-            backgroundColor: COLORS.gold,
-            padding: "16px 36px",
-            borderRadius: "32px",
-            display: "inline-block",
-            alignSelf: "flex-start",
-          }}
-        >
-          Read Our Story
-        </motion.a>
-      </motion.div>
+          <p
+            style={{
+              fontFamily: FONTS.body,
+              fontSize: "clamp(15px, 1.8vw, 17px)",
+              fontWeight: 400,
+              lineHeight: 1.9,
+              color: COLORS.textMuted,
+              margin: 0,
+            }}
+          >
+            Trademark Aroma was born from a single belief — that the right
+            fragrance does not just smell good, it changes how you carry
+            yourself. It is the last thing you put on and the first thing people
+            remember.
+          </p>
+
+          <p
+            style={{
+              fontFamily: FONTS.body,
+              fontSize: "clamp(15px, 1.8vw, 17px)",
+              fontWeight: 400,
+              lineHeight: 1.9,
+              color: COLORS.textMuted,
+              margin: 0,
+            }}
+          >
+            Every bottle in our collection is handpicked for the man and woman
+            who move through the world with intention. We do not sell
+            fragrances. We curate identity.
+          </p>
+
+          {/* Stats */}
+          <div
+            style={{
+              display: "flex",
+              gap: "clamp(20px, 4vw, 48px)",
+              flexWrap: "wrap",
+              paddingTop: "8px",
+            }}
+          >
+            {stats.map((stat) => (
+              <div key={stat.label}>
+                <div
+                  style={{
+                    fontFamily: FONTS.heading,
+                    fontSize: "clamp(28px, 4vw, 42px)",
+                    fontWeight: 600,
+                    color: COLORS.gold,
+                    lineHeight: 1,
+                    marginBottom: "8px",
+                  }}
+                >
+                  {stat.number}
+                </div>
+                <div
+                  style={{
+                    fontFamily: FONTS.body,
+                    fontSize: "clamp(11px, 1.4vw, 13px)",
+                    fontWeight: 500,
+                    letterSpacing: "0.14em",
+                    textTransform: "uppercase",
+                    color: COLORS.textMuted,
+                  }}
+                >
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div
+            style={{ height: "0.5px", backgroundColor: COLORS.surfaceLight }}
+          />
+
+          <motion.a
+            href="/our-story"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            style={{
+              textDecoration: "none",
+              fontFamily: FONTS.body,
+              fontSize: "clamp(12px, 1.5vw, 14px)",
+              fontWeight: 600,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: COLORS.onyx,
+              backgroundColor: COLORS.gold,
+              padding: "clamp(12px, 1.8vw, 16px) clamp(24px, 3.5vw, 36px)",
+              borderRadius: "32px",
+              display: "inline-block",
+              alignSelf: "flex-start",
+            }}
+          >
+            Read Our Story
+          </motion.a>
+        </motion.div>
+      </div>
     </section>
   );
 }
