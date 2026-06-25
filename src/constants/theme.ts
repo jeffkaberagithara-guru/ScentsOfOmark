@@ -29,54 +29,31 @@ export const WA_LINK = (message: string) =>
 // ── All WhatsApp messages used across the website ──────────────────────────
 
 export const WA_MESSAGES = {
-  // Hero section — general order intent
-  heroOrder: WA_LINK("Hi, I'd like to order a fragrance from Scents of Omark"),
-
-  // Hero section — explore button fallback
+  heroOrder: WA_LINK("Hi, I'd like to order a fragrance from Trademark Aroma"),
   heroExplore: WA_LINK(
-    "Hi, I'm interested in exploring fragrances from Scents of Omark. Can you guide me?",
+    "Hi, I'm interested in exploring fragrances from Trademark Aroma. Can you guide me?",
   ),
-
-  // Collection section — view full collection inquiry
   viewCollection: WA_LINK(
-    "Hi, I'd like to know more about the full fragrance collection at Scents of Omark",
+    "Hi, I'd like to know more about the full fragrance collection at Trademark Aroma",
   ),
-
-  // Individual fragrance order — called with fragrance name
   orderFragrance: (name: string) =>
-    WA_LINK(`Hi, I'd like to order ${name} from Scents of Omark`),
-
-  // Personal service section — signature scent consultation
+    WA_LINK(`Hi, I'd like to order ${name} from Trademark Aroma`),
   findMyScent: WA_LINK(
-    "Hi, I'd like help finding my signature scent from Scents of Omark",
+    "Hi, I'd like help finding my signature scent from Trademark Aroma",
   ),
-
-  // Our Story page — brand inquiry
   brandInquiry: WA_LINK(
-    "Hi, I'd like to learn more about Scents of Omark and your story",
+    "Hi, I'd like to learn more about Trademark Aroma and your story",
   ),
-
-  // Fragrance gift inquiry
   giftInquiry: WA_LINK(
-    "Hi, I'm looking for a fragrance gift from Scents of Omark. Can you help me choose?",
+    "Hi, I'm looking for a fragrance gift from Trademark Aroma. Can you help me choose?",
   ),
-
-  // Delivery inquiry
   deliveryInquiry: WA_LINK(
-    "Hi, I'd like to ask about delivery options and availability in Nairobi from Scents of Omark",
+    "Hi, I'd like to ask about delivery options and availability in Nairobi from Trademark Aroma",
   ),
-
-  // Navbar order button
-  navbarOrder: WA_LINK("Hi, I'd like to place an order with Scents of Omark"),
-
-  // Footer connect button
-  footerConnect: WA_LINK("Hi, I'd like to connect with Scents of Omark"),
-
-  // Contact page — general inquiry
-  contactGeneral: WA_LINK("Hi, I have an inquiry about Scents of Omark"),
-
-  // Scent guide — after reading an article
+  navbarOrder: WA_LINK("Hi, I'd like to place an order with Trademark Aroma"),
+  footerConnect: WA_LINK("Hi, I'd like to connect with Trademark Aroma"),
+  contactGeneral: WA_LINK("Hi, I have an inquiry about Trademark Aroma"),
   scentGuideInquiry: WA_LINK(
-    "Hi, I just read your scent guide and I'd like help choosing a fragrance from Scents of Omark",
+    "Hi, I just read your scent guide and I'd like help choosing a fragrance from Trademark Aroma",
   ),
 } as const;
