@@ -29,30 +29,72 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen pt-[72px] bg-[#0B0B0B] text-[#F4EADE]">
-      {/* Hero Section */}
-      <section className="pt-[100px] px-6 pb-[80px] max-w-[1200px] mx-auto text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <span className="text-[16px] font-extrabold tracking-[0.26em] uppercase text-[#6B5A2E] inline-block mb-6 font-body">
-            Get in Touch
-          </span>
-          <h1 className="m-0 font-heading text-[clamp(56px,9vw,96px)] leading-[1.05] font-extrabold text-[#F4EADE]">
-            We'd Love to Hear From You
-          </h1>
-          <p className="mt-5 text-[22px] leading-[2.1] text-[#888888] max-w-[680px] mx-auto font-body">
-            Whether you have questions about our fragrances or need personal
-            fragrance consultations, our team is here to help you find your
-            perfect scent.
-          </p>
-        </motion.div>
+    <div className="min-h-screen bg-[#0B0B0B] text-[#F4EADE]">
+      {/* Hero Section with Video Background */}
+      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
+        {/* Video Background */}
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+            style={{
+              filter: "brightness(0.35) saturate(0.7) contrast(1.1)",
+            }}
+          >
+            <source
+              src="/videos/5452529-hd_1920_1080_25fps.mp4"
+              type="video/mp4"
+            />
+            {/* Fallback image if video doesn't load */}
+            <img
+              src="https://images.pexels.com/photos/14490634/pexels-photo-14490634.jpeg?auto=compress&cs=tinysrgb&w=1200"
+              alt="Trademark Aroma contact"
+              className="w-full h-full object-cover"
+            />
+          </video>
+
+          {/* Overlay Gradients for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[rgba(11,11,11,0.2)] via-[rgba(11,11,11,0.5)] via-60% to-[rgba(11,11,11,0.95)]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[rgba(11,11,11,0.9)] via-transparent to-[rgba(11,11,11,0.1)]" />
+
+          {/* Subtle gold accent overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[rgba(201,169,74,0.08)] to-transparent" />
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 py-16 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="mx-auto max-w-3xl"
+          >
+
+            <h1 className="mt-8 font-heading text-[clamp(48px,7vw,86px)] leading-[1.05] font-extrabold text-[#F4EADE]">
+              We'd <span className="text-[#C9A94A]">Love to Hear</span> From You
+            </h1>
+            <p className="mt-4 text-[20px] leading-[1.9] text-[#DDDDDD] max-w-[680px] mx-auto font-body">
+              Whether you have questions about our fragrances or need personal
+              fragrance consultations, our team is here to help you find your
+              perfect scent.
+            </p>
+
+            {/* Decorative Line */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="w-20 h-0.5 bg-[#C9A94A] mx-auto mt-6"
+            />
+          </motion.div>
+        </div>
       </section>
 
       {/* Contact Info & Form Grid */}
-      <section className="py-16 px-6 max-w-[1200px] mx-auto grid gap-[60px] grid-cols-1 sm:grid-cols-2 items-start">
+      <section className="relative z-10 py-16 px-6 max-w-[1200px] mx-auto grid gap-[60px] grid-cols-1 sm:grid-cols-2 items-start -mt-4">
         {/* Contact Information */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
@@ -239,7 +281,7 @@ export default function Contact() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="pt-[80px] px-6 max-w-[1200px] mx-auto text-center border-t border-[#2A2519]">
+      <section className="relative z-10 pt-[80px] px-6 max-w-[1200px] mx-auto text-center border-t border-[#2A2519]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
