@@ -12,6 +12,19 @@ import {
   ArrowLeft,
   Heart,
   Clock,
+  Briefcase,
+  Moon,
+  Star,
+  Gift,
+  Zap,
+  Flower2,
+  Wind,
+  Cloud,
+  Trees,
+  Snowflake,
+  Globe,
+  Sprout,
+  Layers,
 } from "lucide-react";
 import { WA_LINK } from "../constants/theme";
 import { Link } from "react-router-dom";
@@ -71,18 +84,18 @@ const families = [
   },
 ];
 
-// Questionnaire Data
+// Questionnaire Data with Icons
 const questions = [
   {
     id: "occasion",
     question: "What's the primary occasion for your fragrance?",
     icon: Clock,
     options: [
-      { value: "everyday", label: "Everyday Wear", emoji: "👔" },
-      { value: "evening", label: "Evening Events", emoji: "🌙" },
-      { value: "work", label: "Professional Setting", emoji: "💼" },
-      { value: "special", label: "Special Occasions", emoji: "✨" },
-      { value: "gift", label: "Gift for Someone", emoji: "🎁" },
+      { value: "everyday", label: "Everyday Wear", icon: Sun },
+      { value: "evening", label: "Evening Events", icon: Moon },
+      { value: "work", label: "Professional Setting", icon: Briefcase },
+      { value: "special", label: "Special Occasions", icon: Star },
+      { value: "gift", label: "Gift for Someone", icon: Gift },
     ],
   },
   {
@@ -90,11 +103,11 @@ const questions = [
     question: "Which words best describe your personality?",
     icon: Heart,
     options: [
-      { value: "bold", label: "Bold & Confident", emoji: "🔥" },
-      { value: "elegant", label: "Elegant & Refined", emoji: "🌹" },
-      { value: "fresh", label: "Fresh & Energetic", emoji: "⚡" },
-      { value: "warm", label: "Warm & Approachable", emoji: "☀️" },
-      { value: "mysterious", label: "Mysterious & Deep", emoji: "🌙" },
+      { value: "bold", label: "Bold & Confident", icon: Zap },
+      { value: "elegant", label: "Elegant & Refined", icon: Flower2 },
+      { value: "fresh", label: "Fresh & Energetic", icon: Wind },
+      { value: "warm", label: "Warm & Approachable", icon: Sun },
+      { value: "mysterious", label: "Mysterious & Deep", icon: Cloud },
     ],
   },
   {
@@ -102,11 +115,11 @@ const questions = [
     question: "Which season do you prefer for your fragrance?",
     icon: Sun,
     options: [
-      { value: "spring", label: "Spring (Fresh & Floral)", emoji: "🌸" },
-      { value: "summer", label: "Summer (Light & Citrus)", emoji: "☀️" },
-      { value: "autumn", label: "Autumn (Warm & Spicy)", emoji: "🍂" },
-      { value: "winter", label: "Winter (Rich & Woody)", emoji: "❄️" },
-      { value: "all", label: "All Year Round", emoji: "🌍" },
+      { value: "spring", label: "Spring (Fresh & Floral)", icon: Flower2 },
+      { value: "summer", label: "Summer (Light & Citrus)", icon: Sun },
+      { value: "autumn", label: "Autumn (Warm & Spicy)", icon: Trees },
+      { value: "winter", label: "Winter (Rich & Woody)", icon: Snowflake },
+      { value: "all", label: "All Year Round", icon: Globe },
     ],
   },
   {
@@ -114,10 +127,10 @@ const questions = [
     question: "How intense do you want your scent to be?",
     icon: Flame,
     options: [
-      { value: "light", label: "Light & Subtle", emoji: "🌱" },
-      { value: "moderate", label: "Moderate - Noticeable", emoji: "🌿" },
-      { value: "strong", label: "Strong - Long Lasting", emoji: "🌳" },
-      { value: "intense", label: "Intense - Statement Making", emoji: "🌋" },
+      { value: "light", label: "Light & Subtle", icon: Sprout },
+      { value: "moderate", label: "Moderate - Noticeable", icon: Layers },
+      { value: "strong", label: "Strong - Long Lasting", icon: Layers },
+      { value: "intense", label: "Intense - Statement Making", icon: Flame },
     ],
   },
 ];
@@ -345,7 +358,6 @@ export default function ScentGuide() {
             transition={{ duration: 0.8 }}
             className="mx-auto max-w-3xl"
           >
-            
             <h1
               className="font-heading font-extrabold text-[#F4EADE]"
               style={{
@@ -548,26 +560,37 @@ export default function ScentGuide() {
                     </h3>
                   </div>
 
-                  {/* Options */}
+                  {/* Options with Icons */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-                    {questions[currentQuestion].options.map((option) => (
-                      <motion.button
-                        key={option.value}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={() => handleAnswerSelect(option.value)}
-                        className={`text-left p-4 rounded-[16px] border-2 transition-all font-body ${
-                          selectedAnswer === option.value
-                            ? "border-[#C9A94A] bg-[#C9A94A]/10"
-                            : "border-[#2A2519] bg-transparent hover:border-[#6B5A2E]"
-                        }`}
-                      >
-                        <span className="text-xl mr-2">{option.emoji}</span>
-                        <span className="text-[#F4EADE] font-medium">
-                          {option.label}
-                        </span>
-                      </motion.button>
-                    ))}
+                    {questions[currentQuestion].options.map((option) => {
+                      const OptionIcon = option.icon;
+                      return (
+                        <motion.button
+                          key={option.value}
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => handleAnswerSelect(option.value)}
+                          className={`text-left p-4 rounded-[16px] border-2 transition-all font-body flex items-center gap-3 ${
+                            selectedAnswer === option.value
+                              ? "border-[#C9A94A] bg-[#C9A94A]/10"
+                              : "border-[#2A2519] bg-transparent hover:border-[#6B5A2E]"
+                          }`}
+                        >
+                          <div
+                            className={`p-1.5 rounded-lg ${
+                              selectedAnswer === option.value
+                                ? "text-[#C9A94A]"
+                                : "text-[#6B5A2E]"
+                            }`}
+                          >
+                            <OptionIcon size={20} />
+                          </div>
+                          <span className="text-[#F4EADE] font-medium">
+                            {option.label}
+                          </span>
+                        </motion.button>
+                      );
+                    })}
                   </div>
 
                   {/* Navigation Buttons */}
