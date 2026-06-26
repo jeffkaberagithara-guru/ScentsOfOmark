@@ -2,6 +2,7 @@
 import { WA_LINK } from "../constants/theme";
 
 const footerLinks = [
+  { label: "Home", path: "/" },
   { label: "Our Story", path: "/our-story" },
   { label: "Fragrances", path: "/fragrances" },
   { label: "Scent Guide", path: "/scent-guide" },
