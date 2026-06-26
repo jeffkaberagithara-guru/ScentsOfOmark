@@ -114,29 +114,71 @@ export default function Fragrances() {
   }, [query, filterMood, sort]);
 
   return (
-    <div className="min-h-screen pt-[72px] bg-[#0B0B0B] text-[#F4EADE]">
-      <section className="pt-[88px] px-6 pb-[40px] max-w-[1200px] mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="max-w-[920px] mx-auto text-center">
-            <p className="text-[16px] font-extrabold tracking-[0.24em] uppercase mb-4 text-[#6B5A2E] font-body">
-              Our Collection
-            </p>
-            <h1 className="m-0 font-extrabold text-[clamp(48px,7.5vw,84px)] font-heading">
-              Discover Signature Scents
+    <div className="min-h-screen bg-[#0B0B0B] text-[#F4EADE]">
+      {/* Hero Section with Video Background */}
+      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
+        {/* Video Background */}
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+            style={{
+              filter: "brightness(0.35) saturate(0.7) contrast(1.1)",
+            }}
+          >
+            <source
+              src="/videos/14160278_3840_2160_25fps.mp4"
+              type="video/mp4"
+            />
+            {/* Fallback image if video doesn't load */}
+            <img
+              src="https://images.pexels.com/photos/842876/pexels-photo-842876.jpeg?auto=compress&cs=tinysrgb&w=1200"
+              alt="Trademark Aroma fragrances"
+              className="w-full h-full object-cover"
+            />
+          </video>
+
+          {/* Overlay Gradients for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[rgba(11,11,11,0.2)] via-[rgba(11,11,11,0.5)] via-60% to-[rgba(11,11,11,0.95)]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[rgba(11,11,11,0.9)] via-transparent to-[rgba(11,11,11,0.1)]" />
+
+          {/* Subtle gold accent overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[rgba(201,169,74,0.08)] to-transparent" />
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 py-16 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="mx-auto max-w-3xl"
+          >
+            <h1 className="mt-4 text-[clamp(42px,5vw,72px)] font-heading font-extrabold leading-[0.95] text-[#F4EADE]">
+              Discover <span className="text-[#C9A94A]">Signature Scents</span>
             </h1>
-            <p className="mt-5 text-[20px] leading-[1.9] text-[#888888] font-body">
+            <p className="mt-4 text-[18px] leading-[1.9] text-[#DDDDDD] font-body max-w-2xl mx-auto">
               Browse our curated collection of fragrances handcrafted to leave a
               lasting impression. Filter, explore, and order directly.
             </p>
-          </div>
-        </motion.div>
 
-        {/* Controls */}
-        <div className="mt-[34px] flex gap-4 items-center justify-between flex-wrap">
+            {/* Decorative Line */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="w-20 h-0.5 bg-[#C9A94A] mx-auto mt-6"
+            />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Controls */}
+      <section className="px-6 pb-8 max-w-[1200px] mx-auto -mt-4 relative z-10">
+        <div className="mt-4 flex gap-4 items-center justify-between flex-wrap">
           <div className="flex gap-3 items-center flex-1 min-w-[280px]">
             <div className="relative flex-1">
               <Search
@@ -171,7 +213,11 @@ export default function Fragrances() {
             <div className="flex gap-2 flex-wrap">
               <button
                 onClick={() => setFilterMood(null)}
-                className={`px-3 py-2 rounded-full font-[700] ${filterMood ? "bg-[#1C1A14] text-[#F4EADE]" : "bg-[#C9A94A] text-[#0B0B0B]"}`}
+                className={`px-3 py-2 rounded-full font-[700] ${
+                  filterMood
+                    ? "bg-[#1C1A14] text-[#F4EADE]"
+                    : "bg-[#C9A94A] text-[#0B0B0B]"
+                }`}
               >
                 All
               </button>
@@ -181,7 +227,9 @@ export default function Fragrances() {
                   onClick={() =>
                     setFilterMood((prev) => (prev === m ? null : m))
                   }
-                  className={`px-3 py-2 rounded-full text-[#F4EADE] border border-[#2A2519] font-[700] ${filterMood === m ? "bg-[#C9A94A]" : "bg-[#1C1A14]"}`}
+                  className={`px-3 py-2 rounded-full text-[#F4EADE] border border-[#2A2519] font-[700] ${
+                    filterMood === m ? "bg-[#C9A94A]" : "bg-[#1C1A14]"
+                  }`}
                 >
                   {m}
                 </button>
@@ -191,7 +239,7 @@ export default function Fragrances() {
         </div>
 
         {/* Grid */}
-        <div className="mt-[34px]">
+        <div className="mt-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
             {filtered.map((f) => (
               <motion.article
