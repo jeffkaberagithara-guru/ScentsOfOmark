@@ -5,6 +5,7 @@ import { Menu, X, ShoppingBag } from "lucide-react";
 import { WA_LINK } from "../constants/theme";
 
 const navLinks = [
+  { label: "Home", path: "/" },
   { label: "Our Story", path: "/our-story" },
   { label: "Fragrances", path: "/fragrances" },
   { label: "Scent Guide", path: "/scent-guide" },
